@@ -1,0 +1,20 @@
+{
+  "name": "be4.3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cw": "node BE4.3_CW/index.js",
+    "hw1": "node BE4.3_HW1/index.js",
+    "hw2": "node BE4.3_HW2/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.1.2"
+  }
+}
