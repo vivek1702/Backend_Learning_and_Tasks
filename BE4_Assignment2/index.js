@@ -217,7 +217,9 @@ app.delete("/recipe/:recipeID", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  console.log("app is running on port", PORT);
-});
+module.exports = app;
+
+// const PORT = process.env.PORT;
+// app.listen(PORT, () => {
+//   console.log("app is running on port", PORT);
+// });
