@@ -1,11 +1,20 @@
 const Books = require("../BE1.1_HW1/models/books.models");
 const { initializeDatabase } = require("../BE1.1_HW1/db/db.connect");
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
 
 initializeDatabase();
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Vite frontend
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
+
 app.use(express.json());
 
 //seed new book data to database
@@ -72,7 +81,7 @@ const BookByTitle = async (bookTitle) => {
   }
 };
 
-app.post("/books/title/:bookTitle", async (req, res) => {
+app.get("/books/title/:bookTitle", async (req, res) => {
   try {
     const book = await BookByTitle(req.params.bookTitle);
     if (!book) {
@@ -88,14 +97,14 @@ app.post("/books/title/:bookTitle", async (req, res) => {
 //read books by author
 const BookByAuthor = async (author) => {
   try {
-    const book = await Books.findOne({ author: author });
+    const book = await Books.find({ author: author });
     return book;
   } catch (error) {
     console.log("unable to find book in DB");
   }
 };
 
-app.post("/books/author/:authorName", async (req, res) => {
+app.get("/books/author/:authorName", async (req, res) => {
   try {
     const book = await BookByAuthor(req.params.authorName);
     if (!book) {
