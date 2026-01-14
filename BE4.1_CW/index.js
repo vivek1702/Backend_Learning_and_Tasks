@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
 
 //import from BECW1.1
@@ -6,6 +7,13 @@ const { initializeDatabase } = require("../BE1.1_CW/db/db.connect");
 const Movies = require("../BE1.1_CW/models/movies.models");
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Vite frontend
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 app.use(express.json());
 
 initializeDatabase();
