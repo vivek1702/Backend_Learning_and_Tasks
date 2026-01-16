@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
 
 const { initializeDatabase } = require("../BE1.1_CW/db/db.connect");
@@ -7,6 +8,12 @@ const Movies = require("../BE1.1_CW/models/movies.models");
 initializeDatabase();
 
 const app = express();
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 //add movies to db using api call

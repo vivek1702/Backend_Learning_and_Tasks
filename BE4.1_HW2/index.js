@@ -2,11 +2,18 @@ const Hotels = require("../BE2.1_HW2/models/Hotel.models");
 const { initializeDatabase } = require("../BE2.1_HW2/db/db.connect");
 
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
 
 initializeDatabase();
 
 const app = express();
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Vite frontend
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 app.use(express.json());
 
 //read all the hotels data
