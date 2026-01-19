@@ -1,11 +1,45 @@
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+
 const Hotels = require("../../BE2.1_HW2/models/Hotel.models");
 const { initializeDatabase } = require("../../BE2.1_HW2/db/db.connect");
-const express = require("express");
-require("dotenv").config();
+
+const app = express();
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  }),
+);
+app.use(express.json());
 
 initializeDatabase();
 
-//delete resturant by id
+//read all hotels
+async function AllHotels() {
+  try {
+    const hotel = await Hotels.find();
+    return hotel;
+  } catch (error) {
+    throw error;
+  }
+}
+
+app.get("/hotels", async (req, res) => {
+  try {
+    const hotel = await AllHotels();
+    if (!hotel) {
+      res.status(400).json({ error: "unable to fetch data into variable" });
+    } else {
+      res.json(hotel);
+    }
+  } catch (error) {
+    res.status(500).json({ error: "unable to fetch data" });
+  }
+});
+
+//delete hotel by id
 async function DeleteHotel(HotelId) {
   try {
     const DeletedHotel = await Hotels.findByIdAndDelete(HotelId);
@@ -15,8 +49,6 @@ async function DeleteHotel(HotelId) {
   }
 }
 
-const app = express();
-app.use(express.json());
 app.delete("/hotels/:hotelId", async (req, res) => {
   try {
     await DeleteHotel(req.params.hotelId);
