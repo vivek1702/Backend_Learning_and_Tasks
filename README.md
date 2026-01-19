@@ -76,6 +76,7 @@ Create APIs to:
 - Connect backend with MongoDB using Mongoose
 - Seed dummy data into the database
 
+
 🔹 BI (Backend Integration) Modules
 
 The BI modules demonstrate complete frontend–backend integration, where I implemented CRUD operations across both the backend APIs and the frontend UI, ensuring that changes in the database are reflected correctly in the application interface.
@@ -136,7 +137,6 @@ npm install
 
 Run the server:
 node index.js
-# or
 npm start
 
 
